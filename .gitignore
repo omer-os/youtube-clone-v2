@@ -18,7 +18,7 @@ Thumbs.db
 !.env.example
 !.env.test
 
-./prisma/generated/
+prisma/generated/*
 
 # Vite
 vite.config.js.timestamp-*
