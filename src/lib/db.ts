@@ -1,12 +1,10 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../../../prisma/generated/client.ts"
+import { PrismaClient } from "../../prisma/generated/client";
+import { env } from "$env/dynamic/private";
 
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString: env.DATABASE_URL
 });
 
-const db = new PrismaClient({
-  adapter,
-});
 
-export default db;
+export const db = new PrismaClient({ adapter });
