@@ -9,7 +9,8 @@
   import { authClient } from "$lib/auth-client";
   import Logo from "./logo.svelte";
   import { sidebar } from "./sidebar.svelte.ts";
-  import { cn } from "$lib/utils.ts";
+  import { cn } from "$lib/utils";
+  import { page } from "$app/state";
 
   const session = authClient.useSession();
 
@@ -90,7 +91,11 @@
       {/if}
     </div>
   </div>
-  <div class="flex gap-2 overflow-x-auto pt-2">
+  <div
+    class={cn("flex gap-2 overflow-x-auto pt-2", {
+      hidden: page.url.pathname === "/watch",
+    })}
+  >
     {#each Categories as tag}
       <Button
         variant={tag === "All" ? "default" : "secondary"}

@@ -18,16 +18,17 @@
   import Button from "../ui/button/button.svelte";
   import Logo from "./logo.svelte";
   import Separator from "../ui/separator/separator.svelte";
-  import { page } from "$app/stores";
   import { Sheet, SheetContent } from "../ui/sheet";
   import { sidebar } from "./sidebar.svelte.ts";
   import { cn } from "$lib/utils";
+  import { page } from "$app/state";
 
   const mainNav = [
     { icon: HomeIcon, label: "Home", href: "/" },
     { icon: CircleStarIcon, label: "Shorts", href: "/shorts" },
   ];
 
+  console.log(page.url.pathname);
   const youNav = [
     { icon: HistoryIcon, label: "History", href: "/history" },
     { icon: ListMusicIcon, label: "Playlists", href: "/playlists" },
@@ -62,7 +63,7 @@
     {#each mainNav as item}
       <Button
         size="lg"
-        variant={$page.url.pathname === item.href ? "secondary" : "ghost"}
+        variant={page.url.pathname === item.href ? "secondary" : "ghost"}
         class="justify-start"
         href={item.href}
       >
@@ -131,7 +132,12 @@
 {/snippet}
 
 <aside
-  class="bg-background md:block sticky top-0 left-0 hidden overflow-y-auto w-full z-50 h-dvh"
+  class={cn(
+    "bg-background md:block sticky top-0 left-0 hidden overflow-y-auto w-full z-50 h-dvh",
+    {
+      hidden: page.url.pathname.includes("/watch"),
+    },
+  )}
 >
   {@render Aside()}
 </aside>

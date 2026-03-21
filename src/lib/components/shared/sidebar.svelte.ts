@@ -1,6 +1,6 @@
 class SidebarState {
   open = $state(false);
-  state: "collapsed" | "default" = $state("collapsed")
+  state: "collapsed" | "default" = $state("default")
 
   toggle() {
     this.open = !this.open;
