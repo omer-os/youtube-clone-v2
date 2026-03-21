@@ -1,0 +1,102 @@
+<script>
+  import {
+    CircleStarIcon,
+    HomeIcon,
+    TextAlignJustify,
+    HistoryIcon,
+    ListMusicIcon,
+    ClockIcon,
+    ThumbsUpIcon,
+    PlaySquareIcon,
+    DownloadIcon,
+    ChevronDownIcon,
+    ChevronRightIcon,
+    MusicIcon,
+    RadioIcon,
+    GamepadIcon,
+  } from "@lucide/svelte";
+  import Button from "../ui/button/button.svelte";
+  import Logo from "./logo.svelte";
+  import Separator from "../ui/separator/separator.svelte";
+  import { page } from "$app/stores";
+
+  const mainNav = [
+    { icon: HomeIcon, label: "Home", href: "/" },
+    { icon: CircleStarIcon, label: "Shorts", href: "/shorts" },
+  ];
+
+  const youNav = [
+    { icon: HistoryIcon, label: "History", href: "/history" },
+    { icon: ListMusicIcon, label: "Playlists", href: "/playlists" },
+    { icon: ClockIcon, label: "Watch later", href: "/watch-later" },
+    { icon: ThumbsUpIcon, label: "Liked videos", href: "/liked" },
+    { icon: PlaySquareIcon, label: "Your videos", href: "/your-videos" },
+    { icon: DownloadIcon, label: "Downloads", href: "/downloads" },
+  ];
+
+  const exploreNav = [
+    { icon: MusicIcon, label: "Music", href: "/music" },
+    { icon: RadioIcon, label: "Live", href: "/live" },
+    { icon: GamepadIcon, label: "Gaming", href: "/gaming" },
+  ];
+</script>
+
+<aside class="row-span-2 bg-accent/20 overflow-y-auto">
+  <div class="flex gap-2 p-2">
+    <Button size="icon" variant="ghost">
+      <TextAlignJustify />
+    </Button>
+    <div class="w-24">
+      <Logo />
+    </div>
+  </div>
+
+  <div class="flex p-3 flex-col">
+    {#each mainNav as item}
+      <Button
+        size="lg"
+        variant={$page.url.pathname === item.href ? "secondary" : "ghost"}
+        class="justify-start"
+        href={item.href}
+      >
+        <item.icon />
+        {item.label}
+      </Button>
+    {/each}
+  </div>
+
+  <div class="px-3"><Separator /></div>
+
+  <div class="flex p-3 flex-col">
+    <Button size="lg" variant="ghost" class="justify-start" href="/feed/you">
+      <span class="font-semibold">You</span>
+      <ChevronRightIcon class="size-4" />
+    </Button>
+    {#each youNav as item}
+      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
+        <item.icon />
+        {item.label}
+      </Button>
+    {/each}
+    <Button size="lg" variant="ghost" class="justify-start">
+      <ChevronDownIcon />
+      Show more
+    </Button>
+  </div>
+
+  <div class="px-3"><Separator /></div>
+
+  <div class="flex p-3 flex-col">
+    <span class="px-4 py-2 font-semibold">Explore</span>
+    {#each exploreNav as item}
+      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
+        <item.icon />
+        {item.label}
+      </Button>
+    {/each}
+    <Button size="lg" variant="ghost" class="justify-start">
+      <ChevronDownIcon />
+      Show more
+    </Button>
+  </div>
+</aside>
