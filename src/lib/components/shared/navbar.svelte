@@ -1,5 +1,5 @@
 <script>
-  import { Bell, Mic, Plus, Search } from "@lucide/svelte";
+  import { Bell, Mic, Plus, Search, TextAlignJustify } from "@lucide/svelte";
   import { buttonVariants } from "../ui/button";
   import { InputGroupAddon, InputGroup } from "../ui/input-group";
   import InputGroupButton from "../ui/input-group/input-group-button.svelte";
@@ -7,6 +7,8 @@
   import Button from "../ui/button/button.svelte";
   import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
   import { authClient } from "$lib/auth-client";
+  import Logo from "./logo.svelte";
+  import { sidebar } from "./sidebar.svelte.ts";
 
   const session = authClient.useSession();
 
@@ -29,9 +31,22 @@
   ];
 </script>
 
-<nav class="bg-background/80 flex flex-col sticky top-0 p-3 backdrop-blur-3xl">
+<nav
+  class="bg-background/80 z-50 flex flex-col sticky top-0 p-3 backdrop-blur-3xl"
+>
   <div class="flex">
-    <div class="flex gap-2 flex-1 items-center justify-center">
+    <div class="flex md:hidden gap-2 p-2">
+      <Button onclick={() => sidebar.toggle()} size="icon" variant="ghost">
+        <TextAlignJustify />
+      </Button>
+      <div class="w-24">
+        <Logo />
+      </div>
+    </div>
+
+    <div class="md:hidden flex-1" />
+
+    <div class="md:flex hidden gap-2 flex-1 items-center justify-center">
       <InputGroup class="rounded-full max-w-[30em]">
         <InputGroupInput placeholder="search for anything" />
         <InputGroupAddon align="inline-end" class="pr-0">
@@ -50,7 +65,7 @@
       </Button>
     </div>
 
-    <div class="flex gap-3">
+    <div class="flex gap-3 items-center">
       <Button variant="secondary" class="rounded-full">
         <Plus />
         Create

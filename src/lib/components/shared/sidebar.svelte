@@ -19,6 +19,8 @@
   import Logo from "./logo.svelte";
   import Separator from "../ui/separator/separator.svelte";
   import { page } from "$app/stores";
+  import { Sheet, SheetContent } from "../ui/sheet";
+  import { sidebar } from "./sidebar.svelte.ts";
 
   const mainNav = [
     { icon: HomeIcon, label: "Home", href: "/" },
@@ -41,7 +43,7 @@
   ];
 </script>
 
-<aside class="bg-background overflow-y-auto sticky top-0 left-0 h-dvh">
+{#snippet Aside()}
   <div class="flex gap-2 p-2">
     <Button size="icon" variant="ghost">
       <TextAlignJustify />
@@ -56,6 +58,7 @@
       <Button
         size="lg"
         variant={$page.url.pathname === item.href ? "secondary" : "ghost"}
+        onclick={() => sidebar.toggle()}
         class="justify-start"
         href={item.href}
       >
@@ -68,17 +71,34 @@
   <div class="px-3"><Separator /></div>
 
   <div class="flex p-3 flex-col">
-    <Button size="lg" variant="ghost" class="justify-start" href="/feed/you">
+    <Button
+      size="lg"
+      variant="ghost"
+      onclick={() => sidebar.toggle()}
+      class="justify-start"
+      href="/feed/you"
+    >
       <span class="font-semibold">You</span>
       <ChevronRightIcon class="size-4" />
     </Button>
     {#each youNav as item}
-      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
+      <Button
+        size="lg"
+        variant="ghost"
+        onclick={() => sidebar.toggle()}
+        class="justify-start"
+        href={item.href}
+      >
         <item.icon />
         {item.label}
       </Button>
     {/each}
-    <Button size="lg" variant="ghost" class="justify-start">
+    <Button
+      size="lg"
+      variant="ghost"
+      onclick={() => sidebar.toggle()}
+      class="justify-start"
+    >
       <ChevronDownIcon />
       Show more
     </Button>
@@ -89,14 +109,39 @@
   <div class="flex p-3 flex-col">
     <span class="px-4 py-2 font-semibold">Explore</span>
     {#each exploreNav as item}
-      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
+      <Button
+        size="lg"
+        onclick={() => sidebar.toggle()}
+        variant="ghost"
+        class="justify-start"
+        href={item.href}
+      >
         <item.icon />
         {item.label}
       </Button>
     {/each}
-    <Button size="lg" variant="ghost" class="justify-start">
+    <Button
+      size="lg"
+      variant="ghost"
+      onclick={() => sidebar.toggle()}
+      class="justify-start"
+    >
       <ChevronDownIcon />
       Show more
     </Button>
   </div>
+{/snippet}
+
+<aside
+  class="bg-background md:block sticky top-0 left-0 hidden overflow-y-auto w-full z-50 h-dvh"
+>
+  {@render Aside()}
 </aside>
+
+<Sheet bind:open={sidebar.open}>
+  <SheetContent side="left">
+    <div>
+      {@render Aside()}
+    </div>
+  </SheetContent>
+</Sheet>
