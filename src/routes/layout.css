@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
+@plugin 'tailwind-scrollbar';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,6 +133,20 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme(--color-neutral-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme(--color-accent);
+  border-radius: 9999px;
 }
 
 @layer base {

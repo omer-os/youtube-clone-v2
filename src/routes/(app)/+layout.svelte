@@ -5,10 +5,10 @@
   let { children } = $props();
 </script>
 
-<div class="grid h-dvh w-full grid-rows-[auto_1fr] grid-cols-[13em_1fr]">
+<div class="grid overflow-hidden h-dvh w-full grid-cols-[13em_1fr]">
   <Sidebar />
-  <Navbar />
-  <div class="p-2">
+  <div class="flex flex-col overflow-auto">
+    <Navbar />
     {@render children()}
   </div>
 </div>

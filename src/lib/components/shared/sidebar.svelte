@@ -41,7 +41,7 @@
   ];
 </script>
 
-<aside class="row-span-2 bg-accent/20 overflow-y-auto">
+<aside class="bg-background overflow-y-auto sticky top-0 left-0 h-dvh">
   <div class="flex gap-2 p-2">
     <Button size="icon" variant="ghost">
       <TextAlignJustify />

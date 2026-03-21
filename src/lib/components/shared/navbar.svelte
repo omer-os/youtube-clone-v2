@@ -29,7 +29,7 @@
   ];
 </script>
 
-<nav class="bg-accent/20 flex flex-col p-3 backdrop-blur-2xl">
+<nav class="bg-background/80 flex flex-col sticky top-0 p-3 backdrop-blur-3xl">
   <div class="flex">
     <div class="flex gap-2 flex-1 items-center justify-center">
       <InputGroup class="rounded-full max-w-[30em]">
