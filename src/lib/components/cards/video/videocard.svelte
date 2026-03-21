@@ -2,6 +2,7 @@
   import { Avatar, AvatarFallback } from "$lib/components/ui/avatar";
   import Button from "$lib/components/ui/button/button.svelte";
   import { EllipsisVertical } from "@lucide/svelte";
+  import VideocardDropdownmenu from "./videocard-dropdownmenu.svelte";
 </script>
 
 <div class="w-full rounded-3xl hover:bg-accent">
@@ -28,9 +29,9 @@
             deleniti quod modi cupiditate exercitationem debitis?
           </p>
 
-          <Button variant="ghost" size="icon">
+          <VideocardDropdownmenu>
             <EllipsisVertical />
-          </Button>
+          </VideocardDropdownmenu>
         </div>
         <p class="text-sm text-muted-foreground">Lolipop</p>
         <p class="text-xs mt-1 text-muted-foreground">24K views • 1 day ago</p>

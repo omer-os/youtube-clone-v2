@@ -58,7 +58,6 @@
       <Button
         size="lg"
         variant={$page.url.pathname === item.href ? "secondary" : "ghost"}
-        onclick={() => sidebar.toggle()}
         class="justify-start"
         href={item.href}
       >
@@ -71,34 +70,17 @@
   <div class="px-3"><Separator /></div>
 
   <div class="flex p-3 flex-col">
-    <Button
-      size="lg"
-      variant="ghost"
-      onclick={() => sidebar.toggle()}
-      class="justify-start"
-      href="/feed/you"
-    >
+    <Button size="lg" variant="ghost" class="justify-start" href="/feed/you">
       <span class="font-semibold">You</span>
       <ChevronRightIcon class="size-4" />
     </Button>
     {#each youNav as item}
-      <Button
-        size="lg"
-        variant="ghost"
-        onclick={() => sidebar.toggle()}
-        class="justify-start"
-        href={item.href}
-      >
+      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
         <item.icon />
         {item.label}
       </Button>
     {/each}
-    <Button
-      size="lg"
-      variant="ghost"
-      onclick={() => sidebar.toggle()}
-      class="justify-start"
-    >
+    <Button size="lg" variant="ghost" class="justify-start">
       <ChevronDownIcon />
       Show more
     </Button>
@@ -109,23 +91,12 @@
   <div class="flex p-3 flex-col">
     <span class="px-4 py-2 font-semibold">Explore</span>
     {#each exploreNav as item}
-      <Button
-        size="lg"
-        onclick={() => sidebar.toggle()}
-        variant="ghost"
-        class="justify-start"
-        href={item.href}
-      >
+      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
         <item.icon />
         {item.label}
       </Button>
     {/each}
-    <Button
-      size="lg"
-      variant="ghost"
-      onclick={() => sidebar.toggle()}
-      class="justify-start"
-    >
+    <Button size="lg" variant="ghost" class="justify-start">
       <ChevronDownIcon />
       Show more
     </Button>
