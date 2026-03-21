@@ -21,6 +21,7 @@
   import { page } from "$app/stores";
   import { Sheet, SheetContent } from "../ui/sheet";
   import { sidebar } from "./sidebar.svelte.ts";
+  import { cn } from "$lib/utils";
 
   const mainNav = [
     { icon: HomeIcon, label: "Home", href: "/" },
@@ -44,11 +45,15 @@
 </script>
 
 {#snippet Aside()}
-  <div class="flex gap-2 p-2">
-    <Button size="icon" variant="ghost">
+  <div class="flex gap-2 p-2 overflow-visible">
+    <Button
+      onclick={() => sidebar.toggleState()}
+      size="icon-lg"
+      variant="ghost"
+    >
       <TextAlignJustify />
     </Button>
-    <div class="w-24">
+    <div class="w-24 fixed top-4 md:left-12 left-4">
       <Logo />
     </div>
   </div>
@@ -62,44 +67,66 @@
         href={item.href}
       >
         <item.icon />
-        {item.label}
+        <span
+          class={cn({
+            "md:hidden": sidebar.state === "collapsed",
+          })}
+        >
+          {item.label}
+        </span>
       </Button>
     {/each}
   </div>
 
-  <div class="px-3"><Separator /></div>
+  <div
+    class={cn({
+      "md:hidden": sidebar.state === "collapsed",
+    })}
+  >
+    <div class="px-3"><Separator /></div>
 
-  <div class="flex p-3 flex-col">
-    <Button size="lg" variant="ghost" class="justify-start" href="/feed/you">
-      <span class="font-semibold">You</span>
-      <ChevronRightIcon class="size-4" />
-    </Button>
-    {#each youNav as item}
-      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
-        <item.icon />
-        {item.label}
+    <div class="flex p-3 flex-col">
+      <Button size="lg" variant="ghost" class="justify-start" href="/feed/you">
+        <span class="font-semibold">You</span>
+        <ChevronRightIcon class="size-4" />
       </Button>
-    {/each}
-    <Button size="lg" variant="ghost" class="justify-start">
-      <ChevronDownIcon />
-      Show more
-    </Button>
-  </div>
-
-  <div class="px-3"><Separator /></div>
-
-  <div class="flex p-3 flex-col">
-    <span class="px-4 py-2 font-semibold">Explore</span>
-    {#each exploreNav as item}
-      <Button size="lg" variant="ghost" class="justify-start" href={item.href}>
-        <item.icon />
-        {item.label}
+      {#each youNav as item}
+        <Button
+          size="lg"
+          variant="ghost"
+          class="justify-start"
+          href={item.href}
+        >
+          <item.icon />
+          {item.label}
+        </Button>
+      {/each}
+      <Button size="lg" variant="ghost" class="justify-start">
+        <ChevronDownIcon />
+        Show more
       </Button>
-    {/each}
-    <Button size="lg" variant="ghost" class="justify-start">
-      <ChevronDownIcon />
-      Show more
-    </Button>
+    </div>
+
+    <div class="px-3"><Separator /></div>
+
+    <div class="flex p-3 flex-col">
+      <span class="px-4 py-2 font-semibold">Explore</span>
+      {#each exploreNav as item}
+        <Button
+          size="lg"
+          variant="ghost"
+          class="justify-start"
+          href={item.href}
+        >
+          <item.icon />
+          {item.label}
+        </Button>
+      {/each}
+      <Button size="lg" variant="ghost" class="justify-start">
+        <ChevronDownIcon />
+        Show more
+      </Button>
+    </div>
   </div>
 {/snippet}
 

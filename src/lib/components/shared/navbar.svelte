@@ -9,6 +9,7 @@
   import { authClient } from "$lib/auth-client";
   import Logo from "./logo.svelte";
   import { sidebar } from "./sidebar.svelte.ts";
+  import { cn } from "$lib/utils.ts";
 
   const session = authClient.useSession();
 
@@ -46,7 +47,11 @@
 
     <div class="md:hidden flex-1" />
 
-    <div class="md:flex hidden gap-2 flex-1 items-center justify-center">
+    <div
+      class={cn("md:flex hidden gap-2 flex-1 items-center justify-center", {
+        "md:pl-16": sidebar.state === "collapsed",
+      })}
+    >
       <InputGroup class="rounded-full max-w-[30em]">
         <InputGroupInput placeholder="search for anything" />
         <InputGroupAddon align="inline-end" class="pr-0">
