@@ -35,7 +35,7 @@
 <div class="relative w-full">
   <div
     bind:this={scrollRef}
-    class="flex gap-2 overflow-x-auto"
+    class="flex scrollbar-none gap-2 overflow-x-auto"
     class:pr-12={canScrollRight}
     class:pl-12={canScrollLeft}
     onscroll={updateScrollState}

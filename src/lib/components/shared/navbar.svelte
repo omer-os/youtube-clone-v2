@@ -11,6 +11,7 @@
   import { sidebar } from "./sidebar.svelte.ts";
   import { cn } from "$lib/utils";
   import { page } from "$app/state";
+  import FilterChipsNav from "../navs/filter-chips-nav.svelte";
 
   const session = authClient.useSession();
 
@@ -92,17 +93,10 @@
     </div>
   </div>
   <div
-    class={cn("flex gap-2 overflow-x-auto pt-2", {
+    class={cn("pt-2 px-3", {
       hidden: page.url.pathname === "/watch",
     })}
   >
-    {#each Categories as tag}
-      <Button
-        variant={tag === "All" ? "default" : "secondary"}
-        class="rounded-lg shrink-0"
-      >
-        {tag}
-      </Button>
-    {/each}
+    <FilterChipsNav />
   </div>
 </nav>

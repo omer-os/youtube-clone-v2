@@ -147,6 +147,9 @@
   background: theme(--color-accent);
   border-radius: 9999px;
 }
+.scrollbar-none{
+    scrollbar-width: none;
+}
 
 @layer base {
   * {
