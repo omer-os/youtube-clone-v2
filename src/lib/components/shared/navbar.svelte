@@ -1,5 +1,12 @@
 <script>
-  import { Bell, Mic, Plus, Search, TextAlignJustify } from "@lucide/svelte";
+  import {
+    Bell,
+    LogInIcon,
+    Mic,
+    Plus,
+    Search,
+    TextAlignJustify,
+  } from "@lucide/svelte";
   import { buttonVariants } from "../ui/button";
   import { InputGroupAddon, InputGroup } from "../ui/input-group";
   import InputGroupButton from "../ui/input-group/input-group-button.svelte";
@@ -73,10 +80,17 @@
     </div>
 
     <div class="flex gap-3 items-center">
-      <Button variant="secondary" class="rounded-full">
-        <Plus />
-        Create
-      </Button>
+      {#if $session.data}
+        <Button variant="secondary" class="rounded-full">
+          <Plus />
+          Create
+        </Button>
+      {:else}
+        <Button href="/auth/login" variant="outline">
+          Login
+          <LogInIcon />
+        </Button>
+      {/if}
 
       <Button class="rounded-full" variant="ghost" size="icon">
         <Bell />

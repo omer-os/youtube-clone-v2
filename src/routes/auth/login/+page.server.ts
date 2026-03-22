@@ -5,36 +5,35 @@ import z, { ZodError } from "zod";
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string(),
-})
+});
 
 export const actions: Actions = {
   default: async ({ request }) => {
-    const formData = await request.formData()
-    const formDataObj = Object.fromEntries(formData)
+    const formData = await request.formData();
+    const formDataObj = Object.fromEntries(formData);
 
     try {
-      const requestParams = loginSchema.parse(formDataObj)
-
+      const requestParams = loginSchema.parse(formDataObj);
       const data = await auth.api.signInEmail({
         body: {
           email: requestParams.email,
           password: requestParams.password,
         },
       });
+      if (!data.user.id) {
+        return fail(400, { error: "User Not Found." });
+      }
     } catch (error) {
       if (error instanceof ZodError) {
-        const fieldErrors = error.issues.map(issue => ({
+        const fieldErrors = error.issues.map((issue) => ({
           field: issue.path[0],
-          message: issue.message
-        }))
-        return fail(400, {
-          fieldErrors,
-        })
+          message: issue.message,
+        }));
+        return fail(400, { fieldErrors });
       }
+      return fail(400, { error: "Invalid email or password." });
     }
 
-
-    redirect(302, "/")
-  }
-
-}
+    redirect(302, "/");
+  },
+};
