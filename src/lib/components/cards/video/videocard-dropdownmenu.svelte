@@ -34,7 +34,11 @@
   <PopoverTrigger>
     {@render children()}
   </PopoverTrigger>
-  <PopoverContent class="bg-secondary p-1 w-64 gap-0">
+  <PopoverContent
+    align="end"
+    onInteractOutside={(e) => e.stopPropagation()}
+    class="bg-secondary p-1 w-64 gap-0"
+  >
     {#each items as item}
       <Button
         variant="ghost"

@@ -1,6 +1,7 @@
 <script>
   import Button from "$lib/components/ui/button/button.svelte";
   import { EllipsisVertical, Tv } from "@lucide/svelte";
+  import VideocardDropdownmenu from "./videocard-dropdownmenu.svelte";
 </script>
 
 <div class="flex p-2 gap-2">
@@ -22,7 +23,14 @@
     <p class="flex text-muted-foreground text-xs">265K views • 6 years ago</p>
   </div>
 
-  <Button variant="ghost" size="icon">
-    <EllipsisVertical />
-  </Button>
+  <div
+    onclick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }}
+  >
+    <VideocardDropdownmenu>
+      <EllipsisVertical />
+    </VideocardDropdownmenu>
+  </div>
 </div>

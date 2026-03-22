@@ -41,9 +41,11 @@
       <Button onclick={() => sidebar.toggle()} size="icon" variant="ghost">
         <TextAlignJustify />
       </Button>
-      <div class="w-24">
-        <Logo />
-      </div>
+      <a class="flex items-center" href="/">
+        <div class="w-24">
+          <Logo />
+        </div>
+      </a>
     </div>
 
     <div class="md:hidden flex-1" />
