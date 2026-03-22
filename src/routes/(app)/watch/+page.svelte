@@ -1,11 +1,11 @@
 <script>
-  import { Button } from "$lib/components/ui/button";
-  import { Card, CardContent, CardHeader } from "$lib/components/ui/card";
-  import { X } from "@lucide/svelte";
+  import VideoComments from "$lib/components/cards/video/video-comments.svelte";
+  import VideoMetadata from "$lib/components/cards/video/video-metadata.svelte";
+  import VideocardSmall from "$lib/components/cards/video/videocard-small.svelte";
 </script>
 
-<div class="md:flex-row flex-col flex gap-4">
-  <div class="flex flex-col flex-[2]">
+<div class="md:flex-row flex-col flex gap-4 w-full">
+  <div class="flex flex-col flex-2 w-full">
     <div class="overflow-hidden rounded-2xl">
       <video controls autoplay muted class="aspect-video w-full object-cover">
         <source
@@ -15,53 +15,15 @@
         Your browser does not support the video tag.
       </video>
     </div>
+
+    <VideoMetadata />
+    <VideoComments />
   </div>
   <div class="flex-1 md:mt-1">
-    <Card class="p-0">
-      <CardHeader class="md:bg-secondary flex py-4">
-        <div class="flex flex-col flex-1">
-          <p class="text-lg font-medium">ash aglha pohas ahs aosh aosgh</p>
-          <p class="text-muted-foreground">
-            Mixes are playlists YouTube makes for you
-          </p>
-        </div>
-
-        <Button size="icon" variant="ghost" class="rounded-full">
-          <X />
-        </Button>
-      </CardHeader>
-      <CardContent>
-        <div class="flex gap-3 flex-col">
-          <div class="flex gap-4">
-            <div class="aspect-video w-[10em] rounded-lg bg-secondary"></div>
-            <div class="flex flex-col flex-1">
-              <p class="font-medium">hkjh ashgj asghjash</p>
-              <p class="text-muted-foreground">ahsgkhb ah</p>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="aspect-video w-[10em] rounded-lg bg-secondary"></div>
-            <div class="flex flex-col flex-1">
-              <p class="font-medium">hkjh ashgj asghjash</p>
-              <p class="text-muted-foreground">ahsgkhb ah</p>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="aspect-video w-[10em] rounded-lg bg-secondary"></div>
-            <div class="flex flex-col flex-1">
-              <p class="font-medium">hkjh ashgj asghjash</p>
-              <p class="text-muted-foreground">ahsgkhb ah</p>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="aspect-video w-[10em] rounded-lg bg-secondary"></div>
-            <div class="flex flex-col flex-1">
-              <p class="font-medium">hkjh ashgj asghjash</p>
-              <p class="text-muted-foreground">ahsgkhb ah</p>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <VideocardSmall />
+    <VideocardSmall />
+    <VideocardSmall />
+    <VideocardSmall />
+    <VideocardSmall />
   </div>
 </div>
