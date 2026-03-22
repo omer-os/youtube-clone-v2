@@ -3,9 +3,6 @@
   import Sidebar from "$lib/components/shared/sidebar.svelte";
   import { sidebar } from "../../lib/components/shared/sidebar.svelte.ts";
   import { cn } from "$lib/utils";
-  import { page } from "$app/state";
-  import Logo from "$lib/components/shared/logo.svelte";
-
   let { children } = $props();
 </script>
 

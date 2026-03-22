@@ -23,8 +23,8 @@
     1 hour Lo-Fi Azerbaijani Piano music - Etibar Asadli
   </div>
 
-  <div class="flex justify-between items-center">
-    <div class="flex gap-2 items-center">
+  <div class="flex justify-between gap-2 lg:flex-row flex-col lg:items-center">
+    <div class="flex gap-2 items-center min-w-max">
       <Avatar size="lg">
         <AvatarImage
           src="https://yt3.ggpht.com/Zzh59LLl-0RuJZz6t1S5gbqkKh-uvfyY1uJlceO_9Eb04duIBMwfOm7sqg1uCgGwqZ4nGzLMqQ=s88-c-k-c0x00ffffff-no-rj"
@@ -40,7 +40,7 @@
       <Button class="rounded-full" size="lg">Subscribe</Button>
     </div>
 
-    <div class="flex gap-2">
+    <div class="flex overflow-x-auto w-full gap-2">
       <!-- Like dislike area -->
       <ButtonGroup class="[--radius:9999rem]">
         <Button size="lg" variant="secondary">
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div class="flex gap-3">
+  <div class="flex lg:flex-row flex-col gap-3">
     <Card class="p-2 flex flex-col gap-0 bg-secondary flex-1">
       <CardHeader>279K views 4 years ago</CardHeader>
       <CardContent>
