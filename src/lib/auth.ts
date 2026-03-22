@@ -1,8 +1,8 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "./db";
+import { BETTER_AUTH_SECRET, BETTER_AUTH_URL } from "$env/static/private";
 
-import { env } from "$env/dynamic/private";
 
 
 export const auth = betterAuth({
@@ -12,5 +12,6 @@ export const auth = betterAuth({
   database: prismaAdapter(db, {
     provider: "sqlite",
   }),
-  baseURL: env.BETTER_AUTH_URL
+  baseURL: BETTER_AUTH_URL,
+  secret: BETTER_AUTH_SECRET
 });

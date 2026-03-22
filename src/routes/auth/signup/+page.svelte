@@ -15,8 +15,8 @@
     InputGroupInput,
   } from "$lib/components/ui/input-group";
   import Label from "$lib/components/ui/label/label.svelte";
-  import { Input } from "$lib/components/ui/sidebar";
   import { enhance } from "$app/forms";
+  import Input from "$lib/components/ui/input/input.svelte";
 
   let passwordType: "password" | "text" = $state("password");
 </script>
