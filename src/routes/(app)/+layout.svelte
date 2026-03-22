@@ -14,8 +14,6 @@
   <Sidebar />
   <div class="flex z-40 h-full flex-col overflow-auto">
     <Navbar />
-    <div class="md:p-0 px-2 pb-4!">
-      {@render children()}
-    </div>
+    {@render children()}
   </div>
 </div>

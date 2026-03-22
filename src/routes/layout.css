@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
-@plugin 'tailwind-scrollbar';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -167,3 +166,4 @@
     scrollbar-width: none;
   }
 }
+

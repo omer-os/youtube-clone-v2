@@ -6,7 +6,7 @@
   import Button from "$lib/components/ui/button/button.svelte";
 </script>
 
-<div class="lg:flex-row px-4 flex-col flex gap-4 w-full">
+<div class="lg:flex-row flex-col flex gap-4">
   <div class="flex flex-col flex-2 w-full">
     <div class="overflow-hidden rounded-2xl">
       <video controls autoplay muted class="aspect-video w-full object-cover">
@@ -25,7 +25,7 @@
   </div>
 
   <div class="flex-1 md:mt-1 min-w-0">
-    <div class="sticky py-1 bg-background z-30 top-[4.5em] lg:top-[3.5em]">
+    <div class="sticky py-1 bg-background z-30 top-[4.4em] lg:top-[3.5em]">
       <FilterChipsNav />
     </div>
     <VideocardSmall />

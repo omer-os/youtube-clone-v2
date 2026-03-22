@@ -59,7 +59,7 @@
 
 <div class="flex flex-col gap-3">
   <div
-    class="flex sticky top-[4.5em] lg:top-[3.5em] border-b bg-background z-30 py-4 flex-col"
+    class="flex sticky top-[4.4em] lg:top-[3.5em] border-b bg-background z-30 py-4 flex-col"
   >
     <div class="flex gap-2">
       <p class="text-xl font-bold">408 Comments</p>
