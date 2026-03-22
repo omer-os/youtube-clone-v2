@@ -33,9 +33,7 @@
   ];
 </script>
 
-<nav
-  class="bg-background/80 z-50 flex flex-col sticky top-0 p-3 backdrop-blur-3xl"
->
+<nav class="bg-background z-50 flex flex-col sticky top-0 p-3">
   <div class="flex">
     <div class="flex md:hidden gap-2 p-2">
       <Button onclick={() => sidebar.toggle()} size="icon" variant="ghost">

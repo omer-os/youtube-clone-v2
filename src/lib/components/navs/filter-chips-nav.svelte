@@ -32,10 +32,10 @@
   ];
 </script>
 
-<div class="relative">
+<div class="relative w-full">
   <div
     bind:this={scrollRef}
-    class="flex gap-2 overflow-x-auto scrollbar-hide"
+    class="flex gap-2 overflow-x-auto"
     class:pr-12={canScrollRight}
     class:pl-12={canScrollLeft}
     onscroll={updateScrollState}

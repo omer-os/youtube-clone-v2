@@ -24,10 +24,8 @@
     </div>
   </div>
 
-  <div class="flex-1 md:mt-1">
-    <div
-      class="sticky top-[4.5em] py-1 bg-background/80 z-30 backdrop-blur-3xl"
-    >
+  <div class="flex-1 md:mt-1 min-w-0">
+    <div class="sticky py-1 bg-background z-30 top-[4.5em] lg:top-[3.5em]">
       <FilterChipsNav />
     </div>
     <VideocardSmall />
