@@ -9,4 +9,5 @@
   <Videocard />
   <Videocard />
   <Videocard />
+  <Videocard />
 </Homelayoutgrid>

@@ -3,6 +3,7 @@
   import VideoMetadata from "$lib/components/cards/video/video-metadata.svelte";
   import VideocardSmall from "$lib/components/cards/video/videocard-small.svelte";
   import FilterChipsNav from "$lib/components/navs/filter-chips-nav.svelte";
+  import Button from "$lib/components/ui/button/button.svelte";
 </script>
 
 <div class="lg:flex-row px-4 flex-col flex gap-4 w-full">
@@ -24,7 +25,9 @@
   </div>
 
   <div class="flex-1 md:mt-1">
-    <div class="sticky top-0">
+    <div
+      class="sticky top-[4.5em] py-1 bg-background/80 z-30 backdrop-blur-3xl"
+    >
       <FilterChipsNav />
     </div>
     <VideocardSmall />
@@ -32,5 +35,16 @@
     <VideocardSmall />
     <VideocardSmall />
     <VideocardSmall />
+    <VideocardSmall />
+    <VideocardSmall />
+    <VideocardSmall />
+    <Button variant="outline" class="w-full rounded-full mt-2" size="lg"
+      >Show More</Button
+    >
+  </div>
+
+  <!-- Comments area for small screens  -->
+  <div class="lg:hidden pb-20">
+    <VideoComments />
   </div>
 </div>

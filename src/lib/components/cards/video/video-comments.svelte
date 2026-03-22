@@ -4,6 +4,7 @@
   import Avatar from "$lib/components/ui/avatar/avatar.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import Input from "$lib/components/ui/input/input.svelte";
+  import Separator from "$lib/components/ui/separator/separator.svelte";
   import {
     ChevronDown,
     SortDescIcon,
@@ -56,27 +57,31 @@
   </div>
 {/snippet}
 
-<div class="flex flex-col mt-4">
-  <div class="flex gap-2">
-    <p class="text-xl font-bold">408 Comments</p>
-    <Button size="lg" variant="ghost">
-      <SortDescIcon />
-      Sort By
-    </Button>
+<div class="flex flex-col gap-3">
+  <div
+    class="flex sticky top-[4.5em] border-b bg-background/80 z-30 backdrop-blur-3xl py-4 flex-col"
+  >
+    <div class="flex gap-2">
+      <p class="text-xl font-bold">408 Comments</p>
+      <Button size="lg" variant="ghost">
+        <SortDescIcon />
+        Sort By
+      </Button>
+    </div>
+
+    <div class="flex gap-2">
+      <Avatar>
+        <AvatarImage
+          src="https://i.pinimg.com/1200x/6d/43/ff/6d43ff303f3abd9131e96371596c1a55.jpg"
+        />
+        <AvatarFallback>SP</AvatarFallback>
+      </Avatar>
+
+      <Input placeholder="Add a comment" />
+    </div>
   </div>
 
-  <div class="flex gap-2">
-    <Avatar>
-      <AvatarImage
-        src="https://i.pinimg.com/1200x/6d/43/ff/6d43ff303f3abd9131e96371596c1a55.jpg"
-      />
-      <AvatarFallback>SP</AvatarFallback>
-    </Avatar>
-
-    <Input placeholder="Add a comment" />
-  </div>
-
-  <div class="flex flex-col mt-4 gap-4">
+  <div class="flex flex-col gap-4">
     {@render Comment()}
     {@render Comment()}
     {@render Comment()}

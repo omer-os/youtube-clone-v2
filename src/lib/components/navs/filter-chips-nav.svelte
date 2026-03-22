@@ -35,7 +35,7 @@
 <div class="relative">
   <div
     bind:this={scrollRef}
-    class="flex gap-2 overflow-x-auto pt-2 scrollbar-hide"
+    class="flex gap-2 overflow-x-auto scrollbar-hide"
     class:pr-12={canScrollRight}
     class:pl-12={canScrollLeft}
     onscroll={updateScrollState}
@@ -52,7 +52,7 @@
 
   {#if canScrollLeft}
     <div
-      class="absolute left-0 top-2 z-10 flex w-14 justify-start bg-linear-to-r from-background via-background to-background/0"
+      class="absolute left-0 top-0 z-10 flex w-14 justify-start bg-linear-to-r from-background via-background to-background/0"
     >
       <Button
         size="icon"
@@ -66,7 +66,7 @@
 
   {#if canScrollRight}
     <div
-      class="absolute right-0 top-2 z-10 flex w-14 justify-end bg-linear-to-l from-background via-background to-background/0"
+      class="absolute right-0 top-0 z-10 flex w-14 justify-end bg-linear-to-l from-background via-background to-background/0"
     >
       <Button
         size="icon"
