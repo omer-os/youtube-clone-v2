@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
+  import { authClient } from "$lib/auth-client";
+  import { goto } from "$app/navigation";
   import Button from "$lib/components/ui/button/button.svelte";
   import {
     Card,
@@ -13,10 +14,28 @@
 
   let passwordType: "password" | "text" = $state("password");
   let loading = $state(false);
-  const { form } = $props();
+  let error = $state("");
+  let email = $state("");
+  let password = $state("");
 
   function togglePassword() {
     passwordType = passwordType === "password" ? "text" : "password";
+  }
+
+  async function handleSignin(e: Event) {
+    e.preventDefault();
+    loading = true;
+    error = "";
+    const { error: authError } = await authClient.signIn.email({
+      email,
+      password,
+    });
+    loading = false;
+    if (authError) {
+      error = authError.message ?? "Something went wrong";
+    } else {
+      goto("/");
+    }
   }
 </script>
 
@@ -27,31 +46,23 @@
       <CardDescription>Signin with your account</CardDescription>
     </CardHeader>
     <CardContent class="w-[20em]">
-      <form
-        method="POST"
-        use:enhance={() => {
-          loading = true;
-          return async ({ update }) => {
-            loading = false;
-            await update();
-          };
-        }}
-      >
+      <form onsubmit={handleSignin}>
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-2">
             <Label for="email">Email Address</Label>
-            <Input id="email" name="email" placeholder="Enter email address" />
-            <!-- {#if fieldError("email")} -->
-            <!--   <p class="text-sm text-destructive">{fieldError("email")}</p> -->
-            <!-- {/if} -->
+            <Input
+              id="email"
+              bind:value={email}
+              placeholder="Enter email address"
+            />
           </div>
           <div class="flex flex-col gap-2">
             <Label for="password">Password</Label>
             <div class="relative">
               <Input
-                name="password"
                 id="password"
                 type={passwordType}
+                bind:value={password}
                 placeholder="Enter your password"
               />
               <button
@@ -62,24 +73,20 @@
                 {passwordType === "password" ? "Show" : "Hide"}
               </button>
             </div>
-            <!-- {#if f} -->
-            <!--   <p class="text-sm text-destructive">{fieldError("password")}</p> -->
-            <!-- {/if} -->
           </div>
           <div class="mt-3 w-full flex flex-col">
-            {#if form?.error}
-              <p class="text-center text-destructive mb-1 underline">
-                {form.error}
-              </p>
+            {#if error}
+              <p class="text-center text-destructive mb-1 underline">{error}</p>
             {/if}
             <Button type="submit" disabled={loading}>
               {loading ? "Signing in..." : "Sign in"}
             </Button>
-
             <a
               class="underline text-muted-foreground text-center mt-1"
-              href="/auth/signup">Signup Instead</a
+              href="/auth/signup"
             >
+              Signup Instead
+            </a>
           </div>
         </div>
       </form>

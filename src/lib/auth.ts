@@ -7,8 +7,9 @@ import { BETTER_AUTH_SECERET, BETTER_AUTH_URL } from "$env/static/private";
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false,
+    autoSignIn: true,
   },
+
   database: prismaAdapter(db, {
     provider: "postgresql",
   }),

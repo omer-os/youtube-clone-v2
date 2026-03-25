@@ -5,7 +5,7 @@
   import VideocardDropdownmenu from "./videocard-dropdownmenu.svelte";
 </script>
 
-<a href="/watch?id=sdhsafh">
+<a href="/watch?id=sdhsafh" data-sveltekit-noscroll>
   <div class="w-full rounded-3xl hover:bg-accent">
     <div class="flex flex-col p-4">
       <div>
