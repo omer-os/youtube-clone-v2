@@ -81,7 +81,11 @@
 
     <div class="flex gap-3 items-center">
       {#if $session.data}
-        <Button variant="secondary" class="rounded-full">
+        <Button
+          href="/channel/create-video"
+          variant="secondary"
+          class="rounded-full"
+        >
           <Plus />
           Create
         </Button>

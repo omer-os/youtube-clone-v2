@@ -4,13 +4,13 @@ import { db } from "./db";
 import { BETTER_AUTH_SECERET, BETTER_AUTH_URL } from "$env/static/private";
 
 
-
 export const auth = betterAuth({
   emailAndPassword: {
-    enabled: true
+    enabled: true,
+    autoSignIn: false,
   },
   database: prismaAdapter(db, {
-    provider: "sqlite",
+    provider: "postgresql",
   }),
   baseURL: BETTER_AUTH_URL,
   secret: BETTER_AUTH_SECERET

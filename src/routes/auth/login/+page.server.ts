@@ -18,11 +18,12 @@ export const actions: Actions = {
         body: {
           email: requestParams.email,
           password: requestParams.password,
+          rememberMe: true
         },
+        headers: request.headers,
+        asResponse: true
       });
-      if (!data.user.id) {
-        return fail(400, { error: "User Not Found." });
-      }
+
     } catch (error) {
       if (error instanceof ZodError) {
         const fieldErrors = error.issues.map((issue) => ({
@@ -34,6 +35,6 @@ export const actions: Actions = {
       return fail(400, { error: "Invalid email or password." });
     }
 
-    redirect(302, "/");
+    // redirect(302, "/");
   },
 };
