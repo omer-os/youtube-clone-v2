@@ -20,6 +20,7 @@
   let files = $state<FileList | null>(null);
   let previews = $state<string[]>([]);
   let uploading = $state(false);
+  let progress = $state(0);
   let error = $state("");
 
   function handleChange(e: Event) {
@@ -40,17 +41,35 @@
     }
   }
 
+  async function uploadFile(file: File): Promise<string> {
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName: file.name, contentType: file.type }),
+    });
+    const { presignedUrl, publicUrl } = await res.json();
+
+    await fetch(presignedUrl, {
+      method: "PUT",
+      headers: { "Content-Type": file.type },
+      body: file,
+    });
+
+    return publicUrl;
+  }
+
   async function handleUpload() {
     if (!files) return;
     uploading = true;
     error = "";
-    const body = new FormData();
-    for (const file of files) body.append("files", file);
+    progress = 0;
     try {
-      const res = await fetch("/api/upload", { method: "POST", body });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-      onupload?.(data.urls);
+      const urls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        urls.push(await uploadFile(files[i]));
+        progress = Math.round(((i + 1) / files.length) * 100);
+      }
+      onupload?.(urls);
     } catch (e: any) {
       error = e.message;
     } finally {
@@ -67,6 +86,9 @@
   {/each}
   {#if children}
     {@render children()}
+  {/if}
+  {#if uploading}
+    <p>{progress}%</p>
   {/if}
   <button disabled={!files || uploading} onclick={handleUpload}>
     {uploading ? "Uploading..." : "Upload"}
