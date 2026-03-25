@@ -3,5 +3,7 @@
 </script>
 
 <div>
-  <Uploadfile />
+  <Uploadfile accept={".mp4"}>
+    <div>lsdjlj</div>
+  </Uploadfile>
 </div>
