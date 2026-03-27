@@ -16,7 +16,7 @@
   } = $props();
 </script>
 
-<a href="/watch?id={id}" data-sveltekit-noscroll>
+<a href="/watch/{id}" data-sveltekit-noscroll>
   <div class="w-full rounded-3xl hover:bg-accent">
     <div class="flex flex-col p-4">
       <div>

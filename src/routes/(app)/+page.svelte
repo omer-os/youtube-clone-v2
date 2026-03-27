@@ -1,5 +1,4 @@
 <script>
-  import { createListChannels } from "$lib/api/channels/channels";
   import { createListVideos } from "$lib/api/videos/videos";
   import VideoCard from "$lib/components/cards/video/videoCard.svelte";
   import Homelayoutgrid from "$lib/components/home/homelayoutgrid.svelte";

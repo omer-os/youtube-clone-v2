@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Avatar } from "$lib/components/ui/avatar";
   import AvatarFallback from "$lib/components/ui/avatar/avatar-fallback.svelte";
   import AvatarImage from "$lib/components/ui/avatar/avatar-image.svelte";
@@ -8,47 +8,79 @@
   import Card from "$lib/components/ui/card/card.svelte";
   import {
     Bookmark,
-    ChefHatIcon,
+    ChevronDown,
+    ChevronUp,
     EllipsisVertical,
     Share,
     Sparkle,
     ThumbsDownIcon,
     ThumbsUpIcon,
   } from "@lucide/svelte";
+  import { timeAgo } from "$lib/utils";
+  import type { ShowVideo200Data } from "$lib/api/model";
+
+  let { video }: { video: ShowVideo200Data } = $props();
+  let descExpanded = $state(false);
+
+  function fmt(n: number) {
+    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+    if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
+    return n.toString();
+  }
 </script>
 
 <div class="flex w-full flex-col gap-2 mt-4">
   <div class="text-xl font-bold">
-    1 hour Lo-Fi Azerbaijani Piano music - Etibar Asadli
+    {video.title}
   </div>
   <div
     class="flex w-full justify-between min-w-0 gap-2 lg:flex-row flex-col lg:items-center"
   >
     <div class="flex gap-2 items-center shrink-0 flex-wrap">
-      <Avatar size="lg">
-        <AvatarImage
-          src="https://yt3.ggpht.com/Zzh59LLl-0RuJZz6t1S5gbqkKh-uvfyY1uJlceO_9Eb04duIBMwfOm7sqg1uCgGwqZ4nGzLMqQ=s88-c-k-c0x00ffffff-no-rj"
-        />
-        <AvatarFallback>CH</AvatarFallback>
-      </Avatar>
+      <a href="/channel/{video.channel.id}">
+        <Avatar size="lg">
+          {#if video.channel.avatarUrl}
+            <AvatarImage src={video.channel.avatarUrl} />
+          {/if}
+          <AvatarFallback
+            >{video.channel.name.slice(0, 2).toUpperCase()}</AvatarFallback
+          >
+        </Avatar>
+      </a>
       <div class="flex flex-col">
-        <p class="font-bold">Etibar ASADLI</p>
-        <p class="text-sm text-muted-foreground">31.2K subscribers</p>
+        <a href="/channel/{video.channel.id}" class="font-bold hover:underline">
+          {video.channel.name}
+        </a>
+        <p class="text-sm text-muted-foreground">
+          {fmt(video.channel.subscriberCount)} subscribers
+        </p>
       </div>
-      <Button class="rounded-full" size="lg">Subscribe</Button>
+      <Button
+        class="rounded-full"
+        size="lg"
+        variant={video.channel.isSubscribed ? "outline" : "default"}
+      >
+        {video.channel.isSubscribed ? "Subscribed" : "Subscribe"}
+      </Button>
     </div>
     <div class="flex flex-nowrap overflow-auto gap-2">
       <div class="flex">
         <button
           class="flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground text-sm font-medium rounded-l-full border-r border-border"
         >
-          <ThumbsUpIcon class="size-4" />
-          Like
+          <ThumbsUpIcon
+            class="size-4 {video.myReaction === 'LIKE' ? 'fill-current' : ''}"
+          />
+          {fmt(video.likes)}
         </button>
         <button
           class="flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground text-sm font-medium rounded-r-full"
         >
-          <ThumbsDownIcon class="size-4" />
+          <ThumbsDownIcon
+            class="size-4 {video.myReaction === 'DISLIKE'
+              ? 'fill-current'
+              : ''}"
+          />
         </button>
       </div>
       <button
@@ -77,27 +109,32 @@
     </div>
   </div>
   <div class="flex lg:flex-row flex-col gap-3">
-    <Card class="p-2 flex flex-col gap-0 bg-secondary flex-1">
-      <CardHeader>279K views 4 years ago</CardHeader>
-      <CardContent>
-        <p class="line-clamp-2">
-          1 hour Lo-Fi Azerbaijani Piano music / 1 saat LoFi Azərbaycan Piano
-          musiqisi Piano / Produced by Etibar Asadli Songlist: 00:01 - Axşam
-          mahnısı (Qəmgin mahnı) 03:00 - Bana bana gəl 07:00 - Göy göl
-        </p>
-      </CardContent>
-    </Card>
-    <Card class="p-2 flex flex-col gap-0 bg-secondary flex-1">
-      <CardHeader>Live chat replay</CardHeader>
-      <CardContent class="flex gap-2">
-        <ChefHatIcon />
-        <p class="text-xs">
-          See what others said about this video while it was live.
-        </p>
-        <Button size="sm" class="rounded-full self-end" variant="secondary"
-          >Open Panel</Button
-        >
-      </CardContent>
-    </Card>
+    <button
+      class="text-left flex-1"
+      onclick={() => (descExpanded = !descExpanded)}
+    >
+      <Card
+        class="p-2 flex flex-col gap-0 bg-secondary flex-1 hover:bg-muted transition-colors"
+      >
+        <CardHeader>
+          {fmt(video.views)} views · {timeAgo(video.createdAt)}
+        </CardHeader>
+        <CardContent>
+          {#if video.description}
+            <p class:line-clamp-2={!descExpanded} class="whitespace-pre-line">
+              {video.description}
+            </p>
+          {/if}
+          <span
+            class="text-sm font-semibold mt-1 inline-flex items-center gap-1"
+          >
+            {descExpanded ? "Show less" : "...more"}
+            {#if descExpanded}<ChevronUp size={14} />{:else}<ChevronDown
+                size={14}
+              />{/if}
+          </span>
+        </CardContent>
+      </Card>
+    </button>
   </div>
 </div>
