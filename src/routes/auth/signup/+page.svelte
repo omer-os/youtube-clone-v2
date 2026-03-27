@@ -15,10 +15,33 @@
     InputGroupInput,
   } from "$lib/components/ui/input-group";
   import Label from "$lib/components/ui/label/label.svelte";
-  import { enhance } from "$app/forms";
   import Input from "$lib/components/ui/input/input.svelte";
+  import { signUp } from "$lib/auth-client";
+  import { goto } from "$app/navigation";
 
   let passwordType: "password" | "text" = $state("password");
+  let loading = $state(false);
+
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    loading = true;
+    const { error } = await signUp.email({
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+      name: data.get("username") as string,
+    });
+    loading = false;
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    goto("/");
+  }
 </script>
 
 <div class="h-dvh flex items-center justify-center flex-col">
@@ -28,7 +51,7 @@
       <CardDescription>Create New Youtube Account</CardDescription>
     </CardHeader>
     <CardContent class="w-[20em]">
-      <form method="POST" use:enhance>
+      <form onsubmit={handleSubmit}>
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-2">
             <Label for="username">Username</Label>
@@ -66,18 +89,15 @@
                       ? (passwordType = "text")
                       : (passwordType = "password")}
                 >
-                  {#if passwordType === "password"}
-                    <Eye />
-                  {:else}
-                    <EyeOff />
-                  {/if}
+                  {#if passwordType === "password"}<Eye />{:else}<EyeOff />{/if}
                 </InputGroupButton>
               </InputGroupAddon>
             </InputGroup>
           </div>
-
           <div class="mt-3 w-full flex flex-col">
-            <Button type="submit">Create Account</Button>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Creating..." : "Create Account"}
+            </Button>
             <a
               class="underline text-muted-foreground text-center mt-1"
               href="/auth/login">Login Instead</a

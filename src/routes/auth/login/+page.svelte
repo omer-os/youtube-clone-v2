@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { authClient } from "$lib/auth-client";
   import { goto } from "$app/navigation";
+  import { signIn } from "$lib/auth-client";
   import Button from "$lib/components/ui/button/button.svelte";
   import {
     Card,
@@ -26,7 +26,7 @@
     e.preventDefault();
     loading = true;
     error = "";
-    const { error: authError } = await authClient.signIn.email({
+    const { error: authError } = await signIn.email({
       email,
       password,
     });

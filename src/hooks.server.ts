@@ -1,18 +1,13 @@
-import { auth } from "$lib/auth";
-import { svelteKitHandler } from "better-auth/svelte-kit";
-import { building } from "$app/environment";
+import { PUBLIC_BACKEND_URL } from "$env/static/public"
+import type { Handle } from "@sveltejs/kit"
 
-export async function handle({ event, resolve }) {
-  const session = await auth.api.getSession({
-    headers: event.request.headers,
-  });
+export const handle: Handle = async ({ event, resolve }) => {
+  const session = await fetch(`${PUBLIC_BACKEND_URL}/api/auth/get-session`, {
+    headers: { cookie: event.request.headers.get("cookie") ?? "" }
+  }).then(r => r.json()).catch(() => null)
 
+  event.locals.session = session?.session ?? null
+  event.locals.user = session?.user ?? null
 
-
-  if (session) {
-    event.locals.session = session.session;
-    event.locals.user = session.user;
-  }
-
-  return svelteKitHandler({ event, resolve, auth, building });
+  return resolve(event)
 }
